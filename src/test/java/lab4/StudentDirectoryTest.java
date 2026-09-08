@@ -6,35 +6,33 @@ package lab4;
 
 import java.util.Set;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.BeforeEach;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class StudentDirectoryTest {
 
-    private StudentDirectory directory;
-
-    @BeforeEach
-    public void setUp() {
-        directory = new StudentDirectory();
-        directory.addStudent(101, "Alice");
-        directory.addStudent(102, "Bob");
-    }
-
     @Test
-    public void testGetAllIDsContent() {
-        Set<Integer> ids = directory.getAllIDs();
-        assertEquals(2, ids.size(), "Directory size should be 2");
-        assertTrue(ids.contains(101), "Directory should contain ID 101");
-        assertTrue(ids.contains(102), "Directory should contain ID 102");
+    public void testAddStudentAndGetAllIDs() {
+        StudentDirectory dir = new StudentDirectory();
+        dir.addStudent(101, "Alice");
+        dir.addStudent(102, "Bob");
+
+        Set<Integer> ids = dir.getAllIDs();
+        
+        assertEquals(2, ids.size());
+        assertTrue(ids.contains(101));
+        assertTrue(ids.contains(102));
     }
 
     @Test
     public void testGetAllIDsIsUnmodifiable() {
-        Set<Integer> ids = directory.getAllIDs();
-        
-        // Verifies that attempting to modify the set throws UnsupportedOperationException
+        StudentDirectory dir = new StudentDirectory();
+        dir.addStudent(101, "Alice");
+
+        Set<Integer> ids = dir.getAllIDs();
+
+        // Attempting to modify the returned set must throw UnsupportedOperationException
         assertThrows(UnsupportedOperationException.class, () -> {
-            ids.add(103);
-        }, "Adding an element to getAllIDs() must throw UnsupportedOperationException");
+            ids.add(999);
+        });
     }
 }

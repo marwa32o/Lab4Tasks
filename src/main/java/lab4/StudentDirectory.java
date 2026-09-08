@@ -4,9 +4,13 @@
  */
 package lab4;
 
-import java.util.*;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
 
 public class StudentDirectory {
+
     private final Map<Integer, String> directory = new HashMap<>();
 
     public void addStudent(int id, String name) {

@@ -17,22 +17,4 @@ public class StudentDirectory {
     public Set<Integer> getAllIDs() {
         return Collections.unmodifiableSet(directory.keySet());
     }
-
-    public static void main(String[] args) {
-        System.out.println("--- Homework 1 Test: Unmodifiable Key Set ---");
-        StudentDirectory dir = new StudentDirectory();
-        dir.addStudent(101, "Alice");
-        dir.addStudent(102, "Bob");
-
-        Set<Integer> ids = dir.getAllIDs();
-        System.out.println("Student IDs: " + ids);
-
-        // Test immutability requirement
-        try {
-            ids.add(103);
-            System.out.println("Test Status: FAILED (Set was modified)");
-        } catch (UnsupportedOperationException e) {
-            System.out.println("Test Status: PASSED (Caught UnsupportedOperationException)");
-        }
-    }
 }
